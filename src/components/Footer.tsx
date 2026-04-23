@@ -1,5 +1,16 @@
 import { Link } from "wouter";
 import { Leaf, Instagram, Youtube, Facebook, Mail, Phone, MapPin } from "lucide-react";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription, 
+  DialogFooter, 
+  DialogTrigger,
+  DialogClose
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
@@ -78,10 +89,61 @@ export default function Footer() {
         
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.3em] font-bold text-background/40">
           <p>© {new Date().getFullYear()} Yoga Kirana. Crafted for Transformation.</p>
-          <p className="flex gap-8">
-            <span className="hover:text-white cursor-pointer transition-all">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer transition-all">Terms of Service</span>
-          </p>
+          <div className="flex gap-8">
+            <Dialog>
+              <DialogTrigger render={<button className="hover:text-white cursor-pointer transition-all bg-transparent border-none p-0 uppercase tracking-[0.3em] font-bold text-[10px]" />}>
+                Privacy Policy
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-heading mb-4">Privacy Policy</DialogTitle>
+                  <DialogDescription render={<div className="text-sm space-y-4 text-muted-foreground" />}>
+                    <p>At Yoga Kirana Studio, your privacy is paramount. This policy outlines how we handle your data.</p>
+                    <h5 className="font-bold text-foreground mt-4">1. Information Collection</h5>
+                    <p>We collect information you provide during registration, such as name, email, and health data for therapeutic sessions.</p>
+                    <h5 className="font-bold text-foreground mt-4">2. Data Usage</h5>
+                    <p>Your data is used solely for session management, communication, and providing personalized yoga therapy. We do not sell your data.</p>
+                    <h5 className="font-bold text-foreground mt-4">3. Security</h5>
+                    <p>We implement industry-standard security to protect your sensitive health information.</p>
+                    <h5 className="font-bold text-foreground mt-4">4. Verification</h5>
+                    <p>Our double opt-in system ensures that only valid requests are processed, protecting you from spam.</p>
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="mt-6">
+                  <DialogClose render={<Button variant="outline" className="rounded-full" />}>
+                    Understood
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger render={<button className="hover:text-white cursor-pointer transition-all bg-transparent border-none p-0 uppercase tracking-[0.3em] font-bold text-[10px]" />}>
+                Terms of Service
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-heading mb-4">Terms of Service</DialogTitle>
+                  <DialogDescription render={<div className="text-sm space-y-4 text-muted-foreground" />}>
+                    <p>By using Yoga Kirana Studio's platform, you agree to these terms.</p>
+                    <h5 className="font-bold text-foreground mt-4">1. Studio Access</h5>
+                    <p>Registration grants access to specific programs. Attendance is subject to studio availability and health clearance.</p>
+                    <h5 className="font-bold text-foreground mt-4">2. Health Responsibility</h5>
+                    <p>Yoga involves physical activity. You are responsible for consulting a physician before starting any therapeutic program.</p>
+                    <h5 className="font-bold text-foreground mt-4">3. Cancellation</h5>
+                    <p>Cancellations must be communicated at least 24 hours in advance for therapy sessions.</p>
+                    <h5 className="font-bold text-foreground mt-4">4. Conduct</h5>
+                    <p>We maintain a sanctuary of peace; respectful conduct is mandatory within the studio premises.</p>
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="mt-6">
+                  <DialogClose render={<Button variant="outline" className="rounded-full" />}>
+                    I Agree
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
     </footer>

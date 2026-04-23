@@ -9,7 +9,6 @@ const navLinks = [
   { name: "Programs", href: "/programs" },
   { name: "Gallery", href: "/gallery" },
   { name: "Contact", href: "/contact" },
-  { name: "Register", href: "/register" },
 ];
 
 export default function Navbar() {
@@ -28,7 +27,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass-dark py-4 shadow-2xl" : "bg-transparent py-8"
+        scrolled ? "glass-dark py-4 shadow-2xl" : "bg-transparent py-4 md:py-8"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -71,10 +70,10 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className={`md:hidden transition-colors ${scrolled ? 'text-white' : 'text-foreground'}`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X /> : <Menu />}
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
@@ -97,8 +96,8 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          <Link href="/programs" onClick={() => setIsOpen(false)}>
-            <Button className="w-full rounded-full">Join Now</Button>
+          <Link href="/register" onClick={() => setIsOpen(false)}>
+            <Button className="w-full rounded-full">Enroll Now</Button>
           </Link>
         </motion.div>
       )}

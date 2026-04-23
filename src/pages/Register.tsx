@@ -126,7 +126,7 @@ export default function Register() {
   }
 
   return (
-    <div className="pt-32 pb-20 bg-secondary/10">
+    <div className="pt-24 md:pt-32 pb-20 bg-secondary/10">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center space-y-6 mb-16">
           <motion.h1 

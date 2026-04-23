@@ -42,10 +42,10 @@ export default function Home() {
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                   Experience Inner Radiance
                 </div>
-                <h1 className="text-7xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter text-balance">
+                <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter text-balance">
                   Master the Art of <span className="text-primary font-heading italic block mt-2">Conscious Living</span>
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-lg leading-relaxed font-light">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed font-light">
                   Join South India&apos;s premier boutique yoga studio. Led by <span className="text-foreground font-medium">International record holders</span>, we blend traditional wisdom with luxury wellness.
                 </p>
               </motion.div>
@@ -243,52 +243,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bento Programs Preview */}
-      <section className="section-padding bg-secondary/5 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-10">
-            <div className="space-y-4">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-2">Our Offerings</h2>
-              <p className="text-muted-foreground max-w-xl text-lg font-light leading-relaxed">
-                We bridge ancient discipline with contemporary needs through specialized protocols.
+      {/* Our Offerings / Bento Programs Preview */}
+      <section className="section-padding bg-secondary/20 relative overflow-hidden">
+        {/* Subtle decorative background element */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-20">
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-primary font-bold uppercase tracking-[0.4em] text-[10px]">The Curriculum</span>
+              <h2 className="text-5xl md:text-7xl font-heading leading-[0.9] tracking-tight">
+                Our <span className="italic font-light">Offerings</span>
+              </h2>
+              <p className="text-muted-foreground text-xl font-light leading-relaxed max-w-lg pt-2">
+                We bridge ancient discipline with contemporary needs through meticulously crafted protocols.
               </p>
             </div>
             <Link href="/programs">
-              <Button variant="outline" className="rounded-full border-primary/20 hover:bg-primary/5 h-12 px-8">
-                Explore Full Curriculum
+              <Button variant="outline" className="rounded-full border-primary/20 hover:border-primary hover:bg-transparent px-10 h-14 group transition-all">
+                Explore Full Curriculum <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
             {programs.slice(0, 3).map((program, idx) => (
               <motion.div
                 key={program.id}
-                whileHover={{ y: -8 }}
-                className={`md:col-span-${idx === 0 ? '7' : idx === 1 ? '5' : '12'} group`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className={`${idx === 0 ? 'md:col-span-12 lg:col-span-7' : idx === 1 ? 'md:col-span-6 lg:col-span-5' : 'md:col-span-6 lg:col-span-12'} group`}
               >
                 <Link href={`/programs/${program.id}`}>
-                  <Card className="h-full overflow-hidden border-none shadow-2xl rounded-[3rem] bg-background group cursor-pointer">
-                    <div className="relative h-full flex flex-col">
-                      <div className="aspect-[16/10] overflow-hidden">
+                  <Card className="h-full overflow-hidden border-none shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] rounded-[2.5rem] bg-card hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.12)] transition-all duration-500 cursor-pointer">
+                    <div className={`flex flex-col ${idx === 0 ? 'lg:flex-row h-full' : ''}`}>
+                      {/* Image Container with specific proportions for bento feel */}
+                      <div className={`relative overflow-hidden ${idx === 0 ? 'lg:w-1/2 aspect-[16/10] lg:aspect-auto' : 'aspect-[16/10]'}`}>
                         <img
                           src={program.image}
                           alt={program.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                         />
-                        <div className="absolute top-8 left-8">
-                          <span className="px-4 py-1.5 glass text-primary text-[10px] font-bold rounded-full uppercase tracking-widest border-white/50">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute top-6 left-6">
+                          <span className="px-5 py-2 glass-dark text-white text-[9px] font-bold rounded-full uppercase tracking-[0.2em] border-white/10">
                             {program.category}
                           </span>
                         </div>
                       </div>
-                      <CardContent className="p-10 flex-grow space-y-6">
-                        <h3 className="text-3xl font-heading font-bold group-hover:text-primary transition-colors">{program.title}</h3>
-                        <p className="text-muted-foreground text-lg font-light leading-relaxed">
-                          {program.description}
-                        </p>
-                        <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest pt-4">
-                          Learn More <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+
+                      {/* Content Area */}
+                      <CardContent className={`p-8 md:p-12 flex flex-col justify-center ${idx === 0 ? 'lg:w-1/2' : ''}`}>
+                        <div className="space-y-6">
+                          <h3 className="text-3xl md:text-4xl font-heading leading-tight group-hover:text-primary transition-colors duration-300">
+                            {program.title}
+                          </h3>
+                          <p className="text-muted-foreground text-lg font-light leading-relaxed line-clamp-3">
+                            {program.description}
+                          </p>
+                          <div className="pt-4">
+                            <div className="inline-flex items-center gap-3 text-primary font-bold text-xs uppercase tracking-[0.3em] group/btn">
+                              View Details 
+                              <span className="w-8 h-[1px] bg-primary/30 group-hover/btn:w-12 transition-all duration-300" />
+                              <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                            </div>
+                          </div>
                         </div>
                       </CardContent>
                     </div>
@@ -342,30 +364,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Highlight */}
-      <section className="py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end">
-          <h2 className="text-4xl font-bold tracking-tight">Studio Life</h2>
+      {/* Gallery Highlight / Studio Life Auto-Slider */}
+      <section className="py-24 bg-card/50 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-baseline gap-6 relative z-10 text-center md:text-left">
+          <div className="space-y-2">
+            <span className="text-primary font-bold uppercase tracking-[0.4em] text-[10px]">On The Floor</span>
+            <h2 className="text-5xl md:text-6xl font-heading leading-none">Studio <span className="italic font-light">Life</span></h2>
+          </div>
           <Link href="/gallery">
-            <Button variant="link" className="text-primary font-bold uppercase tracking-widest text-xs">View Full Gallery</Button>
+            <Button variant="link" className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] group">
+              View Collection <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </Link>
         </div>
-        <div className="flex gap-6 overflow-x-auto px-6 pb-12 no-scrollbar scroll-smooth snap-x">
-          {[
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
-            "https://images.unsplash.com/photo-1599447421416-3414500d18a5",
-            "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
-            "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
-            "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539"
-          ].map((url, i) => (
-            <motion.div 
-              key={i} 
-              className="min-w-[400px] h-[500px] rounded-[3rem] overflow-hidden snap-center bg-secondary/10"
-              whileHover={{ scale: 0.98 }}
-            >
-              <img src={`${url}?auto=format&fit=crop&q=80&w=800`} alt="Gallery" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </motion.div>
-          ))}
+
+        <div className="relative flex overflow-hidden">
+          {/* First Marquee Row */}
+          <motion.div 
+            className="flex gap-8 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 40,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            {[
+              "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+              "https://images.unsplash.com/photo-1599447421416-3414500d18a5",
+              "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
+              "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+              "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539"
+            ].map((url, i) => (
+              <div 
+                key={i} 
+                className="w-[80vw] sm:w-[450px] aspect-[4/3] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-secondary/10 shadow-2xl shrink-0 group grow-0"
+              >
+                <img 
+                  src={`${url}?auto=format&fit=crop&q=80&w=800`} 
+                  alt="Studio Life" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out" 
+                  referrerPolicy="no-referrer" 
+                />
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {[
+              "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+              "https://images.unsplash.com/photo-1599447421416-3414500d18a5",
+              "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
+              "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+              "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539"
+            ].map((url, i) => (
+              <div 
+                key={`dup-${i}`} 
+                className="w-[80vw] sm:w-[450px] aspect-[4/3] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-secondary/10 shadow-2xl shrink-0 group grow-0"
+              >
+                <img 
+                  src={`${url}?auto=format&fit=crop&q=80&w=800`} 
+                  alt="Studio Life" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out" 
+                  referrerPolicy="no-referrer" 
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -437,7 +500,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="rounded-full px-12 h-16 text-xl border-white/40 hover:bg-white/10 transition-all">
+              <Button size="lg" variant="outline" className="rounded-full px-12 h-16 text-xl border-white text-white hover:bg-white hover:text-primary transition-all">
                 Chat with Us
               </Button>
             </Link>

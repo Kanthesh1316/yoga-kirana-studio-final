@@ -34,7 +34,7 @@ export default function Programs() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.8] mb-4"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.8] mb-4"
             >
               The <span className="text-primary italic font-heading">Curriculum</span>
             </motion.h1>
@@ -70,7 +70,7 @@ export default function Programs() {
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-x-20 gap-y-32">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-x-20 gap-y-20 md:gap-y-32">
           {filteredPrograms.map((program, index) => (
             <motion.div
               key={program.id}

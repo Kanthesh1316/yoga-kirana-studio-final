@@ -101,7 +101,7 @@ export default function ProgramDetail() {
               </div>
             </div>
 
-            <Link href="/contact">
+            <Link href="/register">
               <Button size="lg" className="w-full md:w-auto rounded-full px-12 h-14 text-lg shadow-xl shadow-primary/20">
                 Enroll Now
               </Button>
@@ -186,7 +186,7 @@ export default function ProgramDetail() {
                     </div>
                   </div>
 
-                  <Link href="/contact">
+                  <Link href="/register">
                     <Button className={`w-full rounded-full h-12 font-bold ${i === 1 ? 'bg-white text-primary hover:bg-white/90' : ''}`}>
                       Select {tier.name}
                     </Button>

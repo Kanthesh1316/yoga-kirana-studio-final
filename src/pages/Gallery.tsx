@@ -24,7 +24,7 @@ export default function Gallery() {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none"
           >
             Studio <span className="text-primary italic font-heading">Life</span>
           </motion.h1>
