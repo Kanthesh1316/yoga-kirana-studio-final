@@ -14,6 +14,7 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import Verify from "@/pages/Verify";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col">
         <ScrollToTop />
+        <FloatingWhatsApp />
         <Toaster position="top-right" richColors />
         <Navbar />
         <main className="flex-grow">
