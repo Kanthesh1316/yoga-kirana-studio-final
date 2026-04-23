@@ -100,10 +100,40 @@
   @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-xl;
 }
 
+.glass-dark {
+  @apply bg-foreground/10 backdrop-blur-md border border-white/5 shadow-2xl;
+}
+
 .section-padding {
-  @apply py-20 px-6 md:px-12 lg:px-24;
+  @apply py-24 px-6 md:px-12 lg:px-24;
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+}
+
+.mask-fade-top {
+  mask-image: linear-gradient(to top, black 0%, black 80%, transparent 100%);
+}
+
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.reveal-on-scroll {
+  @apply opacity-0 translate-y-10 transition-all duration-700 ease-out;
+}
+
+.reveal-on-scroll.active {
+  @apply opacity-100 translate-y-0;
 }

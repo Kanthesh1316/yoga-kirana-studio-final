@@ -20,21 +20,21 @@ export default function Gallery() {
   return (
     <div className="pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center space-y-6 mb-16">
+        <div className="text-center space-y-6 mb-24">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight"
+            className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none"
           >
-            Our <span className="text-primary italic">Gallery</span>
+            Studio <span className="text-primary italic font-heading">Life</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground max-w-2xl mx-auto text-lg"
+            className="text-muted-foreground max-w-2xl mx-auto text-xl font-light leading-relaxed italic"
           >
-            A glimpse into the serene environment and transformative practices at Yoga Kirana Studio.
+            A glimpse into the sanctuary where somatic excellence and inner radiance converge.
           </motion.p>
         </div>
 

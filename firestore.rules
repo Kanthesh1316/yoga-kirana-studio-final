@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'kantheshlg@gmail.com' && request.auth.token.email_verified == true
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Registrations
+    match /registrations/{regId} {
+      allow create: if isValidRegistration(incoming());
+      allow read, update, delete: if isAdmin();
+    }
+
+    function isValidRegistration(data) {
+      return data.keys().hasAll(['fullName', 'email', 'programId', 'createdAt']) &&
+             data.fullName is string && data.fullName.size() <= 200 &&
+             data.email is string && data.email.size() <= 200 &&
+             data.programId is string;
+    }
+
+    // Health / Test (Keep restricted or remove for production)
+    match /test_writes/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Enquiries
+    match /enquiries/{enquiryId} {
+      allow create: if isValidEnquiry(incoming());
+      allow read, update, delete: if isAdmin();
+    }
+
+    function isValidEnquiry(data) {
+      return data.keys().hasAll(['name', 'email', 'message']) &&
+             data.name is string && data.name.size() <= 200 &&
+             data.email is string && data.email.size() <= 200 &&
+             data.message is string && data.message.size() <= 6000;
+    }
+
+    // Messages (New Enquiry System)
+    match /messages/{messageId} {
+      allow create: if isValidMessage(incoming());
+      
+      // Allow unauthenticated update ONLY for verification flow if the token is handled by server
+      // Note: Ideally the server uses Admin SDK to bypass rules, but we use Web SDK shim
+      allow get: if true; 
+      allow update: if (
+        // Action: Verify Email (Must only change verification fields)
+        (
+          existing().verified == false &&
+          incoming().diff(existing()).affectedKeys().hasOnly(['verified', 'verificationToken', 'expiresAt', 'verifiedAt']) &&
+          incoming().verified == true
+        )
+        || 
+        isAdmin()
+      );
+      allow read, delete: if isAdmin();
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'message', 'date', 'verified']) &&
+             data.name is string && data.name.size() >= 2 && data.name.size() <= 200 &&
+             (data.phone is string || data.phone == null) &&
+             data.message is string && data.message.size() <= 6000 &&
+             data.verified is bool;
+    }
+
+    match /pending_messages/{tokenId} {
+      allow read, write: if false; 
+    }
+  }
+}

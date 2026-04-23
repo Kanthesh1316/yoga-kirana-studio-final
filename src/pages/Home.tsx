@@ -10,255 +10,330 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1920"
-            alt="Yoga Practice"
-            className="w-full h-full object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background" />
+          <motion.div 
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.15 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            className="w-full h-full"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1920"
+              alt="Yoga Practice"
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/60 to-background" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-              <Star size={14} />
-              <span>Premium Yoga Experience</span>
-            </div>
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter text-balance">
-              Transform Your Life with <span className="text-primary italic">Yoga</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-              Discover inner peace and physical strength at Yoga Kirana Studio. Our expert-led programs are designed to heal your body and calm your mind.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/programs">
-                <Button size="lg" className="rounded-full px-8 h-14 text-lg">
-                  Join Now <ArrowRight className="ml-2" size={18} />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-lg">
-                  Book a Trial
-                </Button>
-              </Link>
-            </div>
-            <div className="flex items-center gap-6 pt-4">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?u=${i}`} alt="User" />
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm font-medium">
-                <span className="text-primary">500+</span> Happy Students
-              </p>
-            </div>
-          </motion.div>
+        {/* Content Container */}
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="space-y-6"
+              >
+                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full glass border border-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  Experience Inner Radiance
+                </div>
+                <h1 className="text-7xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter text-balance">
+                  Master the Art of <span className="text-primary font-heading italic block mt-2">Conscious Living</span>
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-lg leading-relaxed font-light">
+                  Join South India&apos;s premier boutique yoga studio. Led by <span className="text-foreground font-medium">International record holders</span>, we blend traditional wisdom with luxury wellness.
+                </p>
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative hidden lg:block"
-          >
-            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-              <img
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800"
-                alt="Yoga Pose"
-                className="w-full aspect-[4/5] object-cover"
-                referrerPolicy="no-referrer"
-              />
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex flex-wrap gap-6 items-center"
+              >
+                <Link href="/register">
+                  <Button size="lg" className="rounded-full px-10 h-16 text-lg shadow-2xl shadow-primary/20 hover:scale-105 transition-transform">
+                    Start Your Path <ArrowRight className="ml-2" size={20} />
+                  </Button>
+                </Link>
+                <Link href="/programs">
+                  <Button size="lg" variant="ghost" className="rounded-full px-8 h-16 text-lg hover:bg-primary/5">
+                    Explore Programs
+                  </Button>
+                </Link>
+              </motion.div>
+
+              {/* Social Proof */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="flex items-center gap-8 pt-8 border-t border-primary/10 max-w-sm"
+              >
+                <div className="flex -space-x-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-14 h-14 rounded-full border-4 border-background overflow-hidden shadow-lg">
+                      <img src={`https://i.pravatar.cc/150?u=yoga${i}`} alt="Practitioner" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                  <div className="w-14 h-14 rounded-full border-4 border-background bg-accent flex items-center justify-center text-xs font-bold shadow-lg">
+                    +500
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm font-bold">Trusted by 500+ Seekers</p>
+                  <div className="flex gap-0.5 text-primary">
+                    {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            {/* Floating Elements */}
+
+            {/* Visual Column */}
             <motion.div
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-10 -right-10 glass p-6 rounded-3xl z-20"
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="relative hidden lg:block"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center text-primary">
-                  <Heart />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Daily Wellness</p>
-                  <p className="font-bold">100% Natural</p>
-                </div>
+              <div className="relative z-10 glass p-4 rounded-[4rem] shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200"
+                  alt="Yoga Pose"
+                  className="w-full aspect-[4/5] object-cover rounded-[3rem]"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, 20, 0] }}
-              transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-              className="absolute -bottom-10 -left-10 glass p-6 rounded-3xl z-20"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-accent/20 rounded-2xl flex items-center justify-center text-primary">
-                  <ShieldCheck />
+              
+              {/* Floating Cards */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-12 -right-8 glass p-6 rounded-[2rem] z-20 shadow-2xl backdrop-blur-xl border-white/40"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
+                    <Heart size={28} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-primary font-bold uppercase tracking-tighter">Holistic Care</p>
+                    <p className="text-xl font-heading font-bold">Therapeutic Yoga</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Certified</p>
-                  <p className="font-bold">Expert Trainers</p>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, delay: 1, ease: "easeInOut" }}
+                className="absolute -bottom-12 -left-8 glass p-6 rounded-[2rem] z-20 shadow-2xl backdrop-blur-xl border-white/40"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-accent rounded-2xl flex items-center justify-center text-primary shadow-lg">
+                    <ShieldCheck size={28} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-primary font-bold uppercase tracking-tighter">Certification</p>
+                    <p className="text-xl font-heading font-bold">AYUSH Standard</p>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Decorative Elements */}
+              <div className="absolute top-1/2 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-[80px] -z-10" />
+              <div className="absolute bottom-1/4 -left-20 w-40 h-40 bg-accent/30 rounded-full blur-[80px] -z-10" />
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="section-padding bg-secondary/20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-1 relative">
-            <div className="grid grid-cols-2 gap-4">
-              <img
-                src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&q=80&w=400"
-                alt="Studio"
-                className="rounded-3xl aspect-square object-cover shadow-xl"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=400"
-                alt="Studio"
-                className="rounded-3xl aspect-square object-cover mt-8 shadow-xl"
-              />
-            </div>
-            {/* Achievement Badge */}
-            <div className="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-2xl shadow-2xl max-w-[200px]">
-              <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Record Holder</p>
-              <p className="text-sm font-bold">Nataraj Asana & Nauka Asana</p>
-            </div>
+      {/* Stats/Logo Rail */}
+      <div className="py-12 border-y border-primary/10 bg-secondary/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center justify-items-center">
+            {[
+              { label: "Experience", value: "15+ Years" },
+              { label: "Certifications", value: "International" },
+              { label: "Students", value: "5000+" },
+              { label: "Awards", value: "50+ Gold" }
+            ].map((stat, i) => (
+              <div key={i} className="text-center group">
+                <p className="text-4xl font-heading font-medium text-primary mb-1 group-hover:scale-110 transition-transform">{stat.value}</p>
+                <p className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
           </div>
-          <div className="order-1 lg:order-2 space-y-8">
-            <div className="space-y-2">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                Meet Your Instructor
+        </div>
+      </div>
+
+      {/* About Section - Profile Focus */}
+      <section className="section-padding bg-background relative overflow-hidden">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
+          <div className="relative group">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&q=80&w=800"
+                alt="Studio Practice"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              />
+              <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
+            </motion.div>
+            
+            {/* Achievement Ribbon */}
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              viewport={{ once: true }}
+              className="absolute -right-8 bottom-12 glass-dark p-8 rounded-[2rem] text-white max-w-[280px] shadow-2xl border-white/5"
+            >
+              <Star className="text-accent mb-4" size={32} fill="currentColor" />
+              <p className="text-sm font-bold uppercase tracking-widest text-accent mb-2">Record Holder</p>
+              <p className="text-xl font-heading leading-tight italic">Guinness World Record attempt & National Participant</p>
+            </motion.div>
+          </div>
+
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">The Lineage</span>
+              <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
+                Crafted by <span className="italic font-heading">Masters</span> of the Craft
               </h2>
-              <p className="text-primary font-bold tracking-widest text-sm uppercase">International Gold Medalist & Therapist</p>
             </div>
             
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Led by a world-class expert, Yoga Kirana Studio offers a unique blend of traditional wisdom and therapeutic techniques. Our instructor is a recognized leader in the yoga community with numerous national and international accolades.
+            <p className="text-xl text-muted-foreground leading-relaxed font-light">
+              Founded on the principles of <span className="text-foreground italic">Kirana</span> (Ray of Light), our studio represents the pinnacle of yogic education in the region. Our lead instructor holds prestigious titles including <span className="text-primary font-medium">Karnataka State Yoga Referee</span> and international recognition.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg flex items-center gap-2">
-                  <Star className="text-primary" size={18} />
-                  Championships
-                </h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• National Winner (Govt. of Puducherry)</li>
-                  <li>• Yoga Champion 2024 & 2025</li>
-                  <li>• Karnataka State Yoga Referee</li>
-                </ul>
+            <div className="grid sm:grid-cols-2 gap-8 pt-4">
+              <div className="space-y-4 p-6 glass rounded-3xl">
+                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+                  <Star size={20} />
+                </div>
+                <h4 className="font-bold text-lg">Accolades</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed italic">National Winner & multi-time Yoga Champion (2024-25), recognizing supreme technical mastery.</p>
               </div>
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg flex items-center gap-2">
-                  <ShieldCheck className="text-primary" size={18} />
-                  Awards
-                </h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Aadi Yogi Yoga Bhushan Award</li>
-                  <li>• Shourya Award & Seva Rathina</li>
-                  <li>• Guru Jyothi & Yoga Jyothi</li>
-                </ul>
+              <div className="space-y-4 p-6 glass rounded-3xl">
+                <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center text-primary">
+                  <ShieldCheck size={20} />
+                </div>
+                <h4 className="font-bold text-lg">Honors</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed italic">Recipient of "Aadi Yogi Yoga Bhushan" & "Yoga Jyothi" for exceptional service and teaching excellence.</p>
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6">
               <Link href="/contact">
-                <Button className="rounded-full px-8">Book a Session with Expert</Button>
+                <Button className="rounded-full px-10 h-14 bg-foreground text-background hover:bg-foreground/90 transition-all font-bold">
+                  Consult an Expert
+                </Button>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Programs Preview */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+      {/* Bento Programs Preview */}
+      <section className="section-padding bg-secondary/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-10">
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Our Programs</h2>
-              <p className="text-muted-foreground max-w-xl">
-                From beginner basics to advanced therapy, we have a program tailored for your specific needs.
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-2">Our Offerings</h2>
+              <p className="text-muted-foreground max-w-xl text-lg font-light leading-relaxed">
+                We bridge ancient discipline with contemporary needs through specialized protocols.
               </p>
             </div>
             <Link href="/programs">
-              <Button variant="outline" className="rounded-full">View All Programs</Button>
+              <Button variant="outline" className="rounded-full border-primary/20 hover:bg-primary/5 h-12 px-8">
+                Explore Full Curriculum
+              </Button>
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.slice(0, 3).map((program) => (
+          <div className="grid md:grid-cols-12 gap-8">
+            {programs.slice(0, 3).map((program, idx) => (
               <motion.div
                 key={program.id}
-                whileHover={{ y: -10 }}
-                className="group"
+                whileHover={{ y: -8 }}
+                className={`md:col-span-${idx === 0 ? '7' : idx === 1 ? '5' : '12'} group`}
               >
-                <Card className="overflow-hidden border-none shadow-lg rounded-[2rem] bg-secondary/10">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={program.image}
-                      alt={program.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <CardContent className="p-8 space-y-4">
-                    <div className="flex justify-between items-start">
-                      <h3 className="text-2xl font-bold">{program.title}</h3>
-                      <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full uppercase tracking-wider">
-                        {program.category}
-                      </span>
+                <Link href={`/programs/${program.id}`}>
+                  <Card className="h-full overflow-hidden border-none shadow-2xl rounded-[3rem] bg-background group cursor-pointer">
+                    <div className="relative h-full flex flex-col">
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <img
+                          src={program.image}
+                          alt={program.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute top-8 left-8">
+                          <span className="px-4 py-1.5 glass text-primary text-[10px] font-bold rounded-full uppercase tracking-widest border-white/50">
+                            {program.category}
+                          </span>
+                        </div>
+                      </div>
+                      <CardContent className="p-10 flex-grow space-y-6">
+                        <h3 className="text-3xl font-heading font-bold group-hover:text-primary transition-colors">{program.title}</h3>
+                        <p className="text-muted-foreground text-lg font-light leading-relaxed">
+                          {program.description}
+                        </p>
+                        <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest pt-4">
+                          Learn More <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                        </div>
+                      </CardContent>
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm">
-                      {program.description}
-                    </p>
-                    <Link href={`/programs/${program.id}`}>
-                      <Button variant="link" className="p-0 h-auto font-bold group">
-                        View Details <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="section-padding bg-primary text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -ml-48 -mb-48" />
+      {/* Philosophical Hook Section */}
+      <section className="py-32 bg-foreground text-background relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 blur-3xl pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent rounded-full" />
+        </div>
         
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center space-y-4 mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold">Why Choose Yoga?</h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto">
-              Yoga is not just about flexibility; it's a path to complete physical and mental well-being.
-            </p>
-          </div>
+        <div className="max-w-[1000px] mx-auto text-center px-6 relative z-10 space-y-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="space-y-8"
+          >
+            <h2 className="text-5xl md:text-7xl font-heading font-medium tracking-tight leading-tight italic">
+              "Yoga is the journey of the self, through the self, to the self."
+            </h2>
+            <div className="w-20 h-0.5 bg-primary mx-auto" />
+            <p className="text-background/50 font-bold uppercase tracking-[0.4em] text-xs">Bhagavad Gita</p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-left">
             {[
-              { icon: Heart, title: "Heart Health", desc: "Improve circulation and reduce cardiovascular risks." },
-              { icon: Users, title: "Community", desc: "Join a supportive group of like-minded individuals." },
-              { icon: ShieldCheck, title: "Immunity", desc: "Strengthen your body's natural defense systems." },
-              { icon: Star, title: "Mental Clarity", desc: "Reduce stress and improve focus through mindfulness." }
+              { icon: Heart, title: "Cardio Vitality", desc: "Scientific sequencing that optimizes respiratory and heart health." },
+              { icon: ShieldCheck, title: "Somatic Healing", desc: "Targeted therapy for chronic pain and structural alignment." },
+              { icon: Users, title: "Sacred Space", desc: "A supportive sanctuary for personal and spiritual growth." },
+              { icon: Star, title: "Cognitive Focus", desc: "Mindfulness techniques that sharpen focus and reduce anxiety." }
             ].map((benefit, i) => (
-              <div key={i} className="text-center space-y-4">
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <benefit.icon size={32} />
+              <div key={i} className="space-y-4">
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:bg-primary transition-colors">
+                  <benefit.icon size={24} className="text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">{benefit.title}</h3>
-                <p className="text-primary-foreground/70 text-sm leading-relaxed">
+                <h3 className="text-lg font-bold">{benefit.title}</h3>
+                <p className="text-background/60 text-sm leading-relaxed font-light italic">
                   {benefit.desc}
                 </p>
               </div>
@@ -267,61 +342,107 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">What Our Students Say</h2>
-            <p className="text-muted-foreground">Real stories from our yoga community.</p>
+      {/* Gallery Highlight */}
+      <section className="py-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end">
+          <h2 className="text-4xl font-bold tracking-tight">Studio Life</h2>
+          <Link href="/gallery">
+            <Button variant="link" className="text-primary font-bold uppercase tracking-widest text-xs">View Full Gallery</Button>
+          </Link>
+        </div>
+        <div className="flex gap-6 overflow-x-auto px-6 pb-12 no-scrollbar scroll-smooth snap-x">
+          {[
+            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+            "https://images.unsplash.com/photo-1599447421416-3414500d18a5",
+            "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
+            "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+            "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539"
+          ].map((url, i) => (
+            <motion.div 
+              key={i} 
+              className="min-w-[400px] h-[500px] rounded-[3rem] overflow-hidden snap-center bg-secondary/10"
+              whileHover={{ scale: 0.98 }}
+            >
+              <img src={`${url}?auto=format&fit=crop&q=80&w=800`} alt="Gallery" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ or Membership? Let's do a "Pathways" section */}
+      
+      {/* Testimonials - Immersive Grid */}
+      <section className="section-padding bg-secondary/20 relative">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-5xl md:text-6xl font-bold italic font-heading">Transformed Lives</h2>
+            <p className="text-muted-foreground text-lg font-light">Join the ranks of those who found their light.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               { name: "Ananya Sharma", role: "Weight Loss Program", text: "I lost 8kg in 2 months with the help of Yoga Kirana. The diet plan and yoga sessions were perfectly balanced." },
               { name: "Rahul Verma", role: "Beginner Yoga", text: "The instructors are so patient. I never thought I could be flexible, but now I can touch my toes!" },
               { name: "Priya Das", role: "Face Yoga", text: "Face yoga has changed my skin texture. I feel more confident and my skin glows naturally now." }
             ].map((t, i) => (
-              <Card key={i} className="p-8 rounded-[2rem] border-none bg-secondary/10 shadow-sm">
-                <div className="flex gap-1 text-primary mb-6">
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={16} fill="currentColor" />)}
-                </div>
-                <p className="italic text-muted-foreground mb-8">"{t.text}"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/20" />
-                  <div>
-                    <p className="font-bold">{t.name}</p>
-                    <p className="text-xs text-primary font-medium">{t.role}</p>
+              <motion.div key={i} whileHover={{ y: -10 }}>
+                <Card className="p-10 rounded-[3rem] border-none bg-background shadow-xl hover:shadow-2xl transition-all h-full flex flex-col justify-between">
+                  <div className="space-y-8">
+                    <div className="flex gap-1 text-primary">
+                      {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="currentColor" />)}
+                    </div>
+                    <p className="text-xl font-heading italic text-foreground leading-relaxed">"{t.text}"</p>
                   </div>
-                </div>
-              </Card>
+                  <div className="flex items-center gap-5 pt-10">
+                    <div className="w-14 h-14 rounded-full bg-primary/20 bg-[url('https://i.pravatar.cc/150')] bg-cover shadow-inner" />
+                    <div>
+                      <p className="font-bold text-lg">{t.name}</p>
+                      <p className="text-xs text-primary font-bold uppercase tracking-widest">{t.role}</p>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding px-6">
-        <div className="max-w-5xl mx-auto rounded-[3rem] bg-foreground text-background p-12 md:p-20 text-center space-y-8 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -ml-32 -mt-32" />
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight relative z-10">
-            Ready to Start Your <span className="text-primary italic">Transformation?</span>
-          </h2>
-          <p className="text-lg text-background/70 max-w-2xl mx-auto relative z-10">
-            Join Yoga Kirana Studio today and take the first step towards a healthier, happier you.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 relative z-10">
-            <Link href="/programs">
-              <Button size="lg" className="rounded-full px-10 h-14 text-lg bg-primary hover:bg-primary/90">
-                Join Now
+      {/* CTA Section - Final Hook */}
+      <section className="py-32 px-6">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto rounded-[4rem] bg-primary text-white p-12 md:p-24 text-center space-y-12 relative overflow-hidden"
+        >
+          {/* Decorative Blooms */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-[100px] -mr-48 -mt-48 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 pointer-events-none" />
+          
+          <div className="space-y-6 relative z-10">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.85]">
+              Begin Your <span className="text-accent italic font-heading">Illumination</span> <br/> 
+              <span className="text-4xl md:text-6xl text-white/80">With the Masters</span>
+            </h2>
+            <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto font-light leading-relaxed">
+              Experience the transformative power of authentic Yoga. Limited slots available for personal consultations this month.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-6 relative z-10">
+            <Link href="/register">
+              <Button size="lg" className="rounded-full px-12 h-16 text-xl bg-white text-primary hover:bg-white/90 shadow-2xl transition-all">
+                Enroll Today
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="rounded-full px-10 h-14 text-lg border-white/20 hover:bg-white/10">
-                Contact Us
+              <Button size="lg" variant="outline" className="rounded-full px-12 h-16 text-xl border-white/40 hover:bg-white/10 transition-all">
+                Chat with Us
               </Button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

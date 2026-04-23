@@ -1,8 +1,8 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,7 +40,7 @@ export default function Contact() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    setIsLoading(true);
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -48,15 +50,20 @@ export default function Contact() {
         body: JSON.stringify(values),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to send enquiry.");
+        throw new Error(data.message || "Failed to send enquiry.");
       }
 
+      toast.success(data.message || "Verification email sent!");
       setIsSubmitted(true);
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting enquiry:", error);
-      alert("Failed to send enquiry. Please try again later.");
+      toast.error(error.message || "Failed to send enquiry. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -149,12 +156,14 @@ export default function Contact() {
                     className="text-center space-y-6 py-12"
                   >
                     <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto">
-                      <CheckCircle2 size={48} />
+                      <Mail size={48} />
                     </div>
-                    <h3 className="text-3xl font-bold">Message Sent!</h3>
+                    <h3 className="text-3xl font-bold">Check your email</h3>
                     <p className="text-muted-foreground">
-                      Thank you for reaching out. Our team will get back to you within 24 hours.
+                      We've sent a verification link to your inbox. <br />
+                      Please click the link to verify your enquiry so our team can reach out to you.
                     </p>
+
                     <Button 
                       variant="outline" 
                       className="rounded-full"
@@ -229,8 +238,16 @@ export default function Contact() {
                           </FormItem>
                         )}
                       />
-                      <Button type="submit" className="w-full rounded-full h-14 text-lg shadow-lg shadow-primary/20">
-                        Send Message <Send className="ml-2" size={18} />
+                      <Button 
+                        type="submit" 
+                        disabled={isLoading}
+                        className="w-full rounded-full h-14 text-lg shadow-lg shadow-primary/20"
+                      >
+                        {isLoading ? (
+                          <>Sending... <Loader2 className="ml-2 animate-spin" size={18} /></>
+                        ) : (
+                          <>Send Message <Send className="ml-2" size={18} /></>
+                        )}
                       </Button>
                     </form>
                   </Form>

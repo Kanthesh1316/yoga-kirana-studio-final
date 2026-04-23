@@ -2,6 +2,7 @@ import { Route, Switch, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 import Home from "@/pages/Home";
 import Programs from "@/pages/Programs";
 import ProgramDetail from "@/pages/ProgramDetail";
@@ -9,6 +10,8 @@ import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Register from "@/pages/Register";
 import Profile from "@/pages/Profile";
+import AdminDashboard from "@/pages/AdminDashboard";
+import Verify from "@/pages/Verify";
 import { useEffect } from "react";
 import Lenis from "lenis";
 
@@ -51,6 +54,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col">
         <ScrollToTop />
+        <Toaster position="top-right" richColors />
         <Navbar />
         <main className="flex-grow">
           <Switch>
@@ -61,6 +65,8 @@ export default function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/register" component={Register} />
             <Route path="/profile/:id" component={Profile} />
+            <Route path="/admin" component={AdminDashboard} />
+            <Route path="/verify" component={Verify} />
             <Route>
               <div className="pt-40 text-center">
                 <h1 className="text-4xl font-bold">404 - Page Not Found</h1>

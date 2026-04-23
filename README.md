@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Yoga Kirana Studio
 
-# Run and deploy your AI Studio app
+A premium yoga studio platform offering holistic wellness programs, therapeutic yoga, and a modern lead management system.
 
-This contains everything you need to run your app locally.
+## 🚀 Quick Start
+1. **Develop**: `npm run dev`
+2. **Build**: `npm run build`
+3. **Lint**: `npm run lint`
 
-View your app in AI Studio: https://ai.studio/apps/616d9721-af96-4ff1-85a5-d514322f2379
+## 📖 Detailed Documentation
+For a full technical breakdown, architecture diagrams, and feature lists, please refer to:
+👉 **[DOCUMENTATION.md](./DOCUMENTATION.md)**
 
-## Run Locally
+## 🛠 Tech Stack
+- **Frontend**: React 19, Tailwind 4, Shadcn/UI, Framer Motion
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: Firebase Firestore
+- **Communications**: Brevo (Email), Twilio (SMS Ready)
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🧱 Key Features
+- **Yoga Program Browser**: Categorized General & Therapy sessions.
+- **Double Opt-in Lead System**: Secure email verification for all inquiries.
+- **Admin Dashboard**: Real-time management of verified leads.
+- **Health-centric Registration**: Detailed intake forms for therapeutic programs.

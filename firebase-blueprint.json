@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "Registration": {
+      "title": "Registration",
+      "description": "Student registration form for yoga classes",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "description": "Full name of the student" },
+        "dob": { "type": "string", "format": "date-time", "description": "Date of birth" },
+        "ageRange": { "type": "string", "description": "Age range selection" },
+        "gender": { "type": "string", "description": "Gender of the student" },
+        "address": { "type": "string", "description": "Residential address" },
+        "mobileNumber": { "type": "string", "description": "Mobile number" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "healthCondition": { "type": "string", "description": "Any health conditions or concerns" },
+        "height": { "type": "string", "description": "Height in cm or ft" },
+        "weight": { "type": "string", "description": "Weight in kg" },
+        "occupation": { "type": "string", "description": "Occupation of the student" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of registration" }
+      },
+      "required": ["fullName", "email", "mobileNumber"]
+    },
+    "Enquiry": {
+      "title": "Enquiry",
+      "description": "General enquiry or contact form",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the person" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "message": { "type": "string", "description": "Message content" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of enquiry" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "User enquiry message",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "verified": { "type": "boolean" }
+      },
+      "required": ["name", "email", "phone", "message"]
+    },
+    "PendingMessage": {
+      "title": "Pending Message",
+      "description": "User enquiry message awaiting verification",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "verified": { "type": "boolean" },
+        "token": { "type": "string" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "token", "expiresAt"]
+    }
+  },
+  "firestore": {
+    "registrations": {
+      "schema": "Registration",
+      "description": "Collection of student registrations"
+    },
+    "enquiries": {
+      "schema": "Enquiry",
+      "description": "Collection of contact form enquiries"
+    },
+    "messages": {
+      "schema": "Message",
+      "description": "Collection of user enquiries and messages"
+    },
+    "pending_messages": {
+      "schema": "PendingMessage",
+      "description": "Contact enquiries awaiting email verification."
+    }
+  }
+}
