@@ -535,6 +535,9 @@ async function startServer() {
   const isDev = process.env.NODE_ENV !== "production" || process.env.VITE_DEV === "true";
   console.log(`📡 Mode: ${isDev ? "Development (Vite)" : "Production (Static)"}`);
 
+  // Serve static files from the 'dist' directory
+  const distPath = path.resolve(__dirname, "dist");
+  
   if (isDev) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -542,12 +545,34 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    // Check if dist exists, otherwise throw warning
+    if (fs.existsSync(distPath)) {
+      console.log(`📂 Serving static files from: ${distPath}`);
+      app.use(express.static(distPath, { index: false }));
+    } else {
+      console.warn("⚠️ Warning: 'dist' directory not found. Did you run 'npm run build'?");
+    }
   }
+
+  // SPA Fallback: Serve index.html for all non-API routes
+  app.get("*", (req, res, next) => {
+    // Skip if it's an API route or looks like a file
+    if (req.path.startsWith("/api") || req.path.includes(".")) {
+      return next();
+    }
+
+    if (isDev) {
+      // In dev, Vite handles the fallback
+      next();
+    } else {
+      const indexPath = path.join(distPath, "index.html");
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(404).send("Frontend build not found. Please run 'npm run build'.");
+      }
+    }
+  });
 
   // Global Error Handler to ensure JSON responses
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
